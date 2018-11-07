@@ -81,30 +81,32 @@ namespace TestProject
         /// </summary>
         public static void Example2()
         {
-            bool flExit = false;
-            double value, sum = 0;
-
-            Random rnd = new Random();
-
             Console.WriteLine();
             Console.WriteLine("Сгенерировать последовательность случайных чисел, чей размер не");
             Console.WriteLine("ревышает 0.6 и не меньше 0, и сумма чисел равна 1.");
             Console.WriteLine();
 
+            bool flExit = false;
+            double value;
+            double sum = 0.0;
+            double accuracy = 0.001;
+
+            Random rnd = new Random();
+
             do
             {
-              value = rnd.Next(0, 6);
-              value = Math.Round(value/10,1);
-              if (sum + value <= 1.0)
+              value = rnd.Next(0, 60);
+              value = Math.Round(value/100, 2);
+              if (Math.Abs(sum + value - 1.0) < accuracy || sum + value < 1.0)
               {
-                    if (sum + value == 1.0) flExit = true;
+                    if (Math.Abs(sum + value - 1.0) < accuracy) flExit = true;
                     sum = sum + value;
+                    Console.WriteLine("{0}", value.ToString("0.00"));
               }
             } while (!flExit);
-            
-            Console.WriteLine(sum);            
-            Console.WriteLine();
+                                   
 
+            Console.WriteLine();
         }
 
         /// <summary>
