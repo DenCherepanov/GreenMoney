@@ -114,7 +114,57 @@ namespace TestProject
         /// </summary>
         public static void Example3()
         {
-            Console.WriteLine("Третье задание!");
+            Console.WriteLine();
+            Console.WriteLine("Написать метод, который в качестве входных данных принимает массив");
+            Console.WriteLine("букв английского алфавита по порядку и возвращает пропущенную букву в массиве.");
+            Console.WriteLine();
+
+            string arraySymbol = "";
+            char[] arrayChar;
+
+            Console.Write("Введите массив символов через запятую: ");
+            arraySymbol = Console.ReadLine();
+            arrayChar = arraySymbol.ToCharArray();
+
+            ShowLostSymbol(arrayChar);
+
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Метод, возвращающий пропущенную букву в массиве
+        /// </summary>
+        /// <param name="arrayChar"></param> массив букв
+        public static void ShowLostSymbol(char[] arrayChar)
+        {
+            char[] arrayCharNew;
+            int dif;
+            int codeSymbol;
+            char lostSymbol = ' ';
+            int countLostSumbol = 0;
+            bool errorArray = false;
+
+            arrayCharNew = arrayChar.Where(x => x != ',').ToArray();
+
+            for (int i = 1; i < arrayCharNew.Length; i++)
+            {
+                dif = Math.Abs(arrayCharNew[i-1].CompareTo(arrayCharNew[i]));
+
+                if (dif > 2) errorArray = true;
+                                    
+                if (dif==2)
+                {
+                    codeSymbol = arrayCharNew[i - 1];
+                    lostSymbol = (char)(codeSymbol + 1);
+                    countLostSumbol++;
+                }                
+
+            }
+
+            if (errorArray || countLostSumbol > 1)
+                Console.WriteLine("Массив задан неверно!");
+            else
+                Console.WriteLine("Пропущенный символ: {0}", lostSymbol);
         }
 
         /// <summary>
