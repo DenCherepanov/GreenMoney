@@ -172,7 +172,21 @@ namespace TestProject
         /// </summary>
         public static void Example4()
         {
-            Console.WriteLine("Четвертое задание!");
+            Console.WriteLine();
+            Console.WriteLine("Даны два числовых массива, необходимо написать LINQ-выражение,");
+            Console.WriteLine("которое выдаст коллекцию из двух полей, где одно поле - это пересечение");
+            Console.WriteLine("элементов массива, а другое поле - его квадрат.");
+            Console.WriteLine();
+
+            int[] arrayOne = new int[6] {1, 2, 3, 4, 5, 7};
+            int[] arrayTwo = new int[3] {2, 5, 7};
+            
+            var anonimous = from value in (from c1 in arrayOne select c1).Intersect(from c2 in arrayTwo select c2) select new {val = value, stepen = Math.Pow(value, 2)};
+            
+            foreach (var s in anonimous)
+                Console.WriteLine("{0}, {1}",s.val, s.stepen);
+
+            Console.WriteLine();
         }
     }
 }
